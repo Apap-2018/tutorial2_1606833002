@@ -1,0 +1,81 @@
+Tutorial2_IvanAbdurrahman_1606833002
+
+Latihan Project Viral
+
+1. Ganti baris @RequestMapping(“/viral”) menjadi @RequestMapping(“/viral2jari”). Kemudian run kembali.
+
+a. Apakah terjadi compile error?
+Tidak.
+
+b. Coba akses localhost:8080/viral, berikan alasan dan jelaskan apa yang terjadi.
+Terjadi error dengan tipe kode error 404 yaitu not found. Error ini terjadi karena user melakukan request dengan url /viral, padahal tidak ada routing yang menghandle untuk url tersebut karena telah diganti menjadi /viral2jari.
+
+c. Apakah Kegunaan @RequestMapping(“/viral”)
+@RequestMapping("/viral") berguna untuk melakukan routing ketika user melakukan request dengan url /viral untuk memanggil method dengan mapping yang sesuai. Misal pada kasus ini ketika user mengakses url /viral maka method yang dijalankan adalah method index().
+
+Kembalikan menjadi @RequestMapping(“/viral”)
+
+
+
+2. Ganti nama method index() menjadi nama method viral()
+
+a. Apakah terjadi compile error?
+Tidak.
+
+b. Coba akses localhost:8080/viral, berikan alasan dan jelaskan apa yang terjadi.
+Halaman dapat dibuka seperti awal. Yang terjadi hanya perubahan nama methodnya saja, jadi saat user mengakses /viral maka akan dipanggil method dengan nama viral() seperti awal tanpa ada implementasi yang berubah sama seperti implementasi method index().
+
+Kembalikan menjadi index()
+
+3. Ganti string return type menjadi menjadi return “viral2jari”
+
+a. Apakah terjadi compile error?
+Tidak
+
+b. Coba akses localhost:8080/viral, berikan alasan dan jelaskan apa yang terjadi.
+Terjadi error dengan tipe kode error 500 yaitu internal server error. Error ini terjadi karena method index() yang dipanggil melalui akses user ke url /viral melakukan return ke viral2jari. Secara default dari spring return type ini menunjuk ke file template html mana yang akan digunakan, sementara file viral2jari.html tidak pernah ada, maka terjadilah error seperti demikian.
+
+c. Apakah kegunaan return type pada method controller tersebut?
+Return type pada method controller tersebut berguna untuk memilih file template apa yang akan digunakan sebagai response ke user.
+
+Kembalikan return type menjadi “viral”
+
+
+
+
+Latihan​ ​Request​ ​Parameter
+
+1. Mengapa tulisan “In My feeling” pada thymeleaf challenge tidak pernah muncul di browser?
+Karena ada atribut th:text, berdasarkan penjelasan dari tutorial thymeleaf.org atribut ini dapat mengevaluasi value expressionnya dan mengatur hasil evaluasi tersebut sebagai body dari tag dimana atribut tersebut berada, sehingga teks "In My feeling" yang kita lihat di code dapat tergantikan.
+
+2. Ubah nilai anotasi Request Mapping “/challenge” menjadi “/viral/challenge”. Deskripsikan hasil pada browser dan kembalikan ke bentuk sebelumnya!
+Terjadi error dengan tipe kode error 404 yaitu not found. Error ini terjadi karena user melakukan request dengan url /challenge, padahal tidak ada routing yang menghandle untuk url tersebut karena telah diganti menjadi /viral/challenge.
+
+3. Akses localhost:8080/challenge.
+a. Deskripsikan hasilnya
+Terjadi error dengan tipe kode error 400 yaitu Bad request. Error ini terjadi karena method challenge yang dipanggil melalui akses ke url /challenge membutuhkan String parameter 'name', padahal user tidak memberikan parameter tersebut sehingga terjadilah error seperti demikian.
+
+b. Ubah methodnya menjadi seperti di bawah ini, deskripsikan lalu kembalikan ke bentuk awal! (mengubah attribut required menjadi false)
+Akan muncul halaman seperti keadaan awal, namun parameter String name yang tidak diisi secara otomatis akan digantikan menjadi null.
+
+c. Ubah methodnya menjadi seperti di bawah ini, deskripsikan lalu kembalikan ke bentuk awal! (mengubah required menjadi false dan menambahkan defaultValue yaitu kiki)
+Sama seperti soal poin B akan muncul halaman seperti keadaan awal, hanya saja perbedaannya ada di parameter String name yang tidak diisi maka akan digantikan oleh default value yang diatur pada PageController.java yaitu kiki.
+
+
+
+Latihan​ ​Path Variable
+Setiap ada perubahan pada kode, selalu usahakan run ulang
+1. Akses ​localhost:8080/challenge/ Apakah hasil dari halaman tersebut?
+Terjadi error dengan tipe kode error 400 yaitu Bad request. Error ini terjadi karena method challenge yang dipanggil melalui akses ke url /challenge membutuhkan String parameter 'name', padahal user tidak memberikan parameter tersebut sehingga terjadilah error seperti demikian. Method yang dipanggil adalah method challenge bukan challengePath.
+
+
+2. Ubah method challengePath menjadi seperti berikut (Parameter String name diubah menjadi optional)
+Akses​ ​localhost:8080/challenge/
+Apakah hasil dari halaman tersebut?
+Terjadi error dengan tipe kode error 500 yaitu internal server error. Error ini terjadi karena terjadi ambigu untuk memilih method handler yang dimap untuk url /challenge yaitu antara method challenge atau challengePath.
+
+3. Akses​ ​localhost:8080/challenge/kiki
+Apakah hasil dari halaman tersebut?
+Akan muncul halaman seperti awal dengan parameter name akan berisi kiki sesuai dengan url yang diakses oleh user. Selain itu dengan menggunakan tipe Optional maka variabel tersebut memiliki method isPresent yang mengembalikan nilai boolean true jika variabel tersebut diisi suatu value.
+
+
